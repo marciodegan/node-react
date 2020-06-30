@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["styles"],{
+webpackHotUpdate("styles",{
 
 /***/ "./node_modules/bootstrap/dist/css/bootstrap.min.css":
 /*!***********************************************************!*\
@@ -11,4 +11,4 @@ eval("// extracted by mini-css-extract-plugin;\n    if (true) {\n      var injec
 
 /***/ })
 
-}]);
+})
