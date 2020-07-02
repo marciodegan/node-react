@@ -42,10 +42,13 @@ function HomePage() {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/">Início</NavLink>
+                <NavLink href="/#inicio">Início</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">Portfolio</NavLink>
+                <NavLink href="/#servico">Servico</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/#portfolio">Portfolio</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
@@ -59,8 +62,12 @@ function HomePage() {
             padding-top: 150 px;
             padding-bottom: 150px;
             margin-bottom: 0rem !imporant;
+          }.inicio-link{
+            position: absolute;
+            top: -0px;
           }`}</style>
         <Container className="text-center">
+          <a name="inicio" className="inicio-link"></a>
           <h2 className="display-4 mb-4">Temos a solução que a sua empresa precisa!</h2>
           <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
           <hr className="my-2" />
@@ -72,24 +79,30 @@ function HomePage() {
       </Jumbotron>
 
       <Jumbotron fluid className="servicos">
-        <style>{`.servicos{
+          <style>{`.servicos{
           margin-bottom: 0rem !imporant;
           background-color: #fff;
           padding-top: 80px;
-          padding-bottom: 80px;          
-          }.circulo{
+          padding-bottom: 80px;
+          position: relative;          
+        }.circulo{
             width: 140px;
             height: 140px;
             background-color: #fed136;
             font-size: 52px;
             padding-top: 24px;
             color: #fff
-          }.centralizar{
+        }.centralizar{
             margin: 0 auto !important;
             float: none !important;
-          }`}</style>
+        }.servico-link{
+          position: absolute;
+          top: 0px;
+        }`}</style>
 
         <Container className="text-center">
+        <a name="servico" className="servico-link" />
+
           <div>
             <h2 className="display-4">Serviços</h2>
             <p className="lead pd-4">typography and spacing </p>
@@ -120,25 +133,28 @@ function HomePage() {
         </Container>
       </Jumbotron>
       <Jumbotron fluid className="portfolio">
-        <style>
-          {`.portfolio{
+        <style>{`.portfolio{
               background-color: #f8f9fa;
               padding-top: 80px
               padding-bottom: 80px;
               margin-bottom: 0rem important!
-              }`}
-        </style>
+              position: relative;
+          }.portfolio-link{
+              position: absolute;
+              top: 0px;
+          }`}</style>
         
         <Container className="text-center">
+        <a name="portfolio" className="portfolio-link" />
           <div>
             <h2 className="display-4">Portfólio</h2>
             <p className="lead pb-4">jdfidoasjfi fiodsaf i fkioe fio jisdoa fjio faniofsdaf io</p>
           </div>
 
-          <div className="row row-cols-1 row-cols-md-2">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-md-3">
             <div className="col mb-4">
               <div className="card">
-                <img src="..." class="card-img-top" alt="..."/>
+                <img src="/download.jpeg" class="card-img-top" alt="..."/>
                 <div className="card-body">
                   <h5 className="card-title">Card title</h5>
                   <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -147,7 +163,7 @@ function HomePage() {
             </div>
             <div className="col mb-4">
               <div className="card">
-                <img src="..." class="card-img-top" alt="..."/>
+                <img src="/download.jpeg" class="card-img-top" alt="..."/>
                 <div className="card-body">
                   <h5 className="card-title">Card title</h5>
                   <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -156,7 +172,7 @@ function HomePage() {
             </div>
             <div className="col mb-4">
               <div className="card">
-                <img src="..." class="card-img-top" alt="..."/>
+                <img src="/download.jpeg" class="card-img-top" alt="..."/>
                 <div className="card-body">
                   <h5 className="card-title">Card title</h5>
                   <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
@@ -165,23 +181,55 @@ function HomePage() {
             </div>
             <div class="col mb-4">
               <div class="card">
-                <img src="..." class="card-img-top" alt="..." />
+                <img src="/download.jpeg" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 </div>
               </div>
             </div>
-          </div>
-
-
-
-          
+            <div class="col mb-4">
+              <div class="card">
+                <img src="/download.jpeg" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-4">
+              <div class="card">
+                <img src="/images.jpeg" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+          </div> 
           </Container>
-
         </Jumbotron>
-            </div >
+        <Jumbotron fluid className="rodape">         
+          <style>{`.rodape{
+            background-color: #000;
+            color: #fff;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin-bottom: 0rem !imporant!
+          }`}
+
+          </style>
+          <Container className="text-center">
+            <footer className="footer mt-auto py-3">
+              <div className="container">
+                <span className="text-muted">Degan</span>
+              </div>
+            </footer>
+          </Container>
+        </Jumbotron>
       
+      
+      </div >      
     )
 }
 
