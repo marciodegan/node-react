@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Head from 'next/head';
+
+import Menu from '../components/Menu';
 
 import {
   Container,
@@ -22,10 +25,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
-function HomePage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-  return (
+const Home = (data) => (
     <div>
       <Head>
         <title>Home - Degan</title>
@@ -34,26 +34,7 @@ function HomePage() {
 
 
       </Head>
-
-      <Navbar color="dark" dark expand="md" className="fixed-top">
-        <Container>
-          <NavbarBrand href="/">Degan</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/#inicio">Início</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/#servico">Servico</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/#portfolio">Portfolio</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Container>
-      </Navbar>
+      <Menu />      
       <br />
       <Jumbotron fluid className="descr-top">
         <style>{`.descr-top{
@@ -68,12 +49,13 @@ function HomePage() {
           }`}</style>
         <Container className="text-center">
           <a name="inicio" className="inicio-link"></a>
-          <h2 className="display-4 mb-4">Temos a solução que a sua empresa precisa!</h2>
-          <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+          <h2 className="display-4 mb-4">{data.response.home.topTitulo}</h2>
+          <p className="lead">{data.response.home.topSubtitulo}</p>
           <hr className="my-2" />
-          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
           <p className="lead">
-            <Button outline color="primary" size="lg">ENTRE EM CONTATO</Button>
+            <a href={data.response.home.topLinkBtn} className="btn btn-primary btn-lg">
+              <a>{data.response.home.topTextoBtn}</a>
+            </a>
           </p>
         </Container>
       </Jumbotron>
@@ -104,30 +86,30 @@ function HomePage() {
         <a name="servico" className="servico-link" />
 
           <div>
-            <h2 className="display-4">Serviços</h2>
-            <p className="lead pd-4">typography and spacing </p>
+            <h2 className="display-4">{data.response.home.serTitulo}</h2>
+            <p className="lead pd-4">{data.response.home.serSubtitulo}</p>
           </div>
           <div class="row">
             <div class="col-lg-4">
               <div className="rounded-circle circulo centralizar">
-                <FontAwesomeIcon icon="code" />
+                <FontAwesomeIcon icon={data.response.home.serUmIcone} />
               </div>
-              <h2 className="mt-4 mb-4">Serviço 1</h2>
-              <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+              <h2 className="mt-4 mb-4">{data.response.home.serUmTitulo}</h2>
+              <p>{data.response.home.serUmDesc}</p>
             </div>
             <div class="col-lg-4">
               <div className="rounded-circle circulo centralizar">
-                <FontAwesomeIcon icon="laptop-code" />
+                <FontAwesomeIcon icon={data.response.home.serDoisIcone} />
               </div>
-              <h2 className="mt-4 mb-4">Serviço 2</h2>
-              <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+              <h2 className="mt-4 mb-4">{data.response.home.serDoisTitulo}</h2>
+              <p>{data.response.home.serDoisDesc}</p>
             </div>
             <div class="col-lg-4">
               <div className="rounded-circle circulo centralizar">
-                <FontAwesomeIcon icon="desktop" />
+                <FontAwesomeIcon icon={data.response.home.serTresIcone} />
               </div>
-              <h2 className="mt-4 mb-4">Serviço 3</h2>
-              <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+              <h2 className="mt-4 mb-4">{data.response.home.serTresTitulo}</h2>
+              <p>{data.response.home.serTresDesc}</p>
             </div>
           </div>
         </Container>
@@ -147,62 +129,62 @@ function HomePage() {
         <Container className="text-center">
         <a name="portfolio" className="portfolio-link" />
           <div>
-            <h2 className="display-4">Portfólio</h2>
-            <p className="lead pb-4">jdfidoasjfi fiodsaf i fkioe fio jisdoa fjio faniofsdaf io</p>
+            <h2 className="display-4">{data.response.home.portTitulo}</h2>
+            <p className="lead pb-4">{data.response.home.portSubtitulo}</p>
           </div>
 
           <div className="row row-cols-1 row-cols-md-2 row-cols-md-3">
             <div className="col mb-4">
               <div className="card">
-                <img src="/download.jpeg" class="card-img-top" alt="..."/>
+                <img src={data.response.home.portUmFileName} class="card-img-top" alt="..."/>
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 className="card-title">{data.response.home.portUmTitulo}</h5>
+                  <p className="card-text">{data.response.home.portSubtitulo}</p>
                 </div>
               </div>
             </div>
             <div className="col mb-4">
               <div className="card">
-                <img src="/download.jpeg" class="card-img-top" alt="..."/>
+                <img src={data.response.home.portDoisFileName} class="card-img-top" alt="..."/>
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 className="card-title">{data.response.home.portDoisTitulo}</h5>
+                  <p className="card-text">{data.response.home.portDoisSubtitulo}</p>
                 </div>
               </div>
             </div>
             <div className="col mb-4">
               <div className="card">
-                <img src="/download.jpeg" class="card-img-top" alt="..."/>
+                <img src={data.response.home.portTresFileName} class="card-img-top" alt="..."/>
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                  <h5 className="card-title">{data.response.home.portTresTitulo}</h5>
+                  <p className="card-text">{data.response.home.portTresSubtitulo}</p>
                 </div>
               </div>
             </div>
             <div class="col mb-4">
               <div class="card">
-                <img src="/download.jpeg" class="card-img-top" alt="..." />
+                <img src={data.response.home.portQuatroFileName} class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">{data.response.home.portQuatroTitulo}</h5>
+                  <p class="card-text">{data.response.home.portQuatroSubtitulo}</p>
                 </div>
               </div>
             </div>
             <div class="col mb-4">
               <div class="card">
-                <img src="/download.jpeg" class="card-img-top" alt="..." />
+                <img src={data.response.home.portCincoFileName} class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">{data.response.home.portCincoTitulo}</h5>
+                  <p class="card-text">{data.response.home.portCincoSubtitulo}</p>
                 </div>
               </div>
             </div>
             <div class="col mb-4">
               <div class="card">
-                <img src="/images.jpeg" class="card-img-top" alt="..." />
+                <img src={data.response.home.portSeisFileName} class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">{data.response.home.portSeisTitulo}</h5>
+                  <p class="card-text">{data.response.home.portSeisSubtitulo}</p>
                 </div>
               </div>
             </div>
@@ -226,11 +208,14 @@ function HomePage() {
               </div>
             </footer>
           </Container>
-        </Jumbotron>
-      
-      
-      </div >      
-    )
+      </Jumbotron>        
+    </div >      
+);
+
+Home.getInitialProps= async () => {
+  var response = await axios.get('http://localhost:8080/home');
+  console.log(response);
+  return {response: response.data};
 }
 
-export default HomePage
+export default Home;

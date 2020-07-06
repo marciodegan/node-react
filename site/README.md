@@ -49,3 +49,6 @@ Instalar ícones
 ```
 npm i --save @fortawesome/fontawesome-svg-core  @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
 ```
+
+Realizar conexão com a API
+### npm install --save axios
